@@ -1,0 +1,36 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongo": "^0.1.0",
+    "mongoose": "^8.24.11",
+    "passport": "^0.7.0",
+    "passport-github2": "^0.1.12"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acpalacios3/notes-app-main.git"
+  },
+  "bugs": {
+    "url": "https://github.com/acpalacios3/notes-app-main/issues"
+  },
+  "homepage": "https://github.com/acpalacios3/notes-app-main#readme"
+}
