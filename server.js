@@ -1,7 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
 import mongoose from "mongoose";
-import userRoutes from "./routes/userRoutes.js"
+import userRoutes from "./routes/userRoutes.js";
+import bookmarkRoutes from "./routes/bookRoutes.js";
 import passport from 'passport';
 import "./config/passport.js";
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(passport.initialize());
 
 app.use("/api/users", userRoutes);
+app.use("/api/bookmark", bookmarkRoutes);
 
 
 app.get("/", (req, res) => {

@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:3001/api/bookmark/6b071b034dfe06698491defd
+method: GET
+order: 4000

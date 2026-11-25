@@ -17,7 +17,7 @@ const bookMarkSchema = new Schema({
     },
     descripcion:{
          type: String
-    }
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
