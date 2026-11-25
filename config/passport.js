@@ -2,6 +2,8 @@ import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import User from "../models/User.js";
 
+
+// Passport uses GitHubStrategy to authenticate users via GitHub.
 // Setting up WHAT strategy that Passport is going ot use
 passport.use(
   // in this case, we're gonna use Github
@@ -33,15 +35,15 @@ passport.use(
       try {
 
         // we get the user's email that GitHub returns in the profile object
-        const email = profile.emails?.[0]?.value;
-        if (!email) {
+        const emailGitHub = profile.emails?.[0]?.value;
+        if (!emailGitHub) {
           return done(new Error('GitHub email not available'));
         }
 
 
         // The "profile" object contains the user's GitHub information
         // check in MongoDB if a user is already registered with that GitHub ID
-        const existingUser = await User.findOne({ githubId: profile.id });
+        let existingUser = await User.findOne({ githubId: profile.id });
 
         if (existingUser) {
           // If user already exists, pass them to the next middleware
@@ -50,7 +52,7 @@ passport.use(
         // ========================================
         // Check if the email already exists
         // ========================================
-        existingUser = await User.findOne({ email });
+        existingUser = await User.findOne({ email: emailGitHub });
 
         if (existingUser) {
 
@@ -67,11 +69,12 @@ passport.use(
         const newUser = new User({
             username: profile.username, // get the username from GitHub
           githubId: profile.id, // And the GitHub ID (which tells the User we don't need a password)
-          email: profile._json.email, // Some providers return an array of emails
+          email: emailGitHub, // Some providers return an array of emails
         });
 
         await newUser.save();
         done(null, newUser);
+
       } catch (err) {
         done(err);
       }
@@ -79,11 +82,13 @@ passport.use(
   ),
 );
 
-// These functions are needed for session management
-passport.serializeUser((user, done) => {
-  done(null, user.id); //Save the user ID in the session.
-});
+export default passport;
 
-passport.deserializeUser((id, done) => {
+// These functions are needed for session management
+// passport.serializeUser((user, done) => {
+//   done(null, user.id); //Save the user ID in the session.
+// });
+
+// passport.deserializeUser((id, done) => {
   // Retrieve the user from MongoDB using their ID. And the routes can access the user's information.
-  User.findById(id, (err, user) => done(err, user)); 
+  // User.findById(id, (err, user) => done(err, user)); 
