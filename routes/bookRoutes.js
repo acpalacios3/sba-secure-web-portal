@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 
         }
 
-        if (bookMark.user != req.user._id) {
+        if (bookMark.user.toString() !== req.user._id.toString()) {
             return res.status(403).json({ message: 'User is not authorized to access this BookMark.' });
         }
 
@@ -73,6 +73,7 @@ router.post('/', async (req, res) => {
 // PUT /api/bookmark/:id - Update a bookmark
 router.put('/:id', async (req, res) => {
     try {
+
 
         // This needs an authorization check
         // findByIdAndUpdate(): finds the product and updates it.
@@ -108,11 +109,11 @@ router.delete('/:id', async (req, res) => {
         const bookmark = await Bookmark.findById(req.params.id);
 
         if (!bookmark) {
-            return res.status(404).json({ message: 'No bookmarkound with this id!' });
+            return res.status(404).json({ message: 'No bookmark found with this id!' });
         }
 
         //  This needs an authorization check
-        if (bookmark.user != req.user._id) {
+        if (bookmark.user.toString() !== req.user._id.toString()) {
             return res.status(403).json({
                 message: 'User is not authorized to delete this Bookmark'
             });

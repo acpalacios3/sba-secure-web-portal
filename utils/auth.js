@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const secret = process.env.JWT_SECRET; // Secret key used to sign and verify JWT tokens
-const expiration = "24h"; // Token expiration
+const expiration = "2h"; // Token expiration
 
 // Middleware to verify the JWT and protect private routes
 export function authMiddleware(req, res, next) {
