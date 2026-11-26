@@ -1,0 +1,8 @@
+$kind: http-request
+url: http://localhost:3001/api/bookmark/6b0726294dfe06698491deff
+method: DELETE
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0qjb}}"
+order: 6000

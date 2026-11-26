@@ -1,0 +1,17 @@
+$kind: http-request
+url: http://localhost:3001/api/bookmark/6b071b034dfe06698491defd
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \"title\":\"Google -test: PUT update\",\r
+
+    \"descripcion\":\"My favorite search engine -test: PUT update\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0qjb}}"
+order: 5000
